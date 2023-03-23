@@ -92,8 +92,8 @@ export default function CreateJobModal({ show, setShow }: Props) {
                                                 <div className='flex flex-col'>
                                                     <Heading className='' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[60px]' height='h-[20px]'>Experience</Heading>
                                                     <div className='flex'>
-                                                        <Input className='border-[#E6E6E6]' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Minimum'} type='text' onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMinExp(e.target.value)} />
-                                                        <Input className='border-[#E6E6E6] ml-6' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Maximum'} type='text' onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMaxExp(e.target.value)} />
+                                                        <Input className='border-[#E6E6E6]' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Minimum'} type="number" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMinExp(e.target.value)} />
+                                                        <Input className='border-[#E6E6E6] ml-6' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Maximum'} type="number" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMaxExp(e.target.value)} />
                                                     </div>
                                                 </div>
                                             </div>
@@ -101,14 +101,14 @@ export default function CreateJobModal({ show, setShow }: Props) {
                                                 <div className='flex flex-col'>
                                                     <Heading className='' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[45px]' height='h-[20px]'>Salary</Heading>
                                                     <div className='flex'>
-                                                        <Input className='border-[#E6E6E6]' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Minimum'} type='text' onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMinSal(e.target.value)} />
-                                                        <Input className='border-[#E6E6E6] ml-6' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Maximum'} type={''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMaxSal(e.target.value)} />
+                                                        <Input className='border-[#E6E6E6]' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Minimum'} type="number" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMinSal(e.target.value)} />
+                                                        <Input className='border-[#E6E6E6] ml-6' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Maximum'} type="number" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMaxSal(e.target.value)} />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className='flex flex-col h-auto mt-6'>
                                                 <Heading className='' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[110px]' height='h-[20px]'>Total employee</Heading>
-                                                <Input className={'border-[#E6E6E6]'} fontSize='text-[14px]' fontWeight='font-[500]' width='w-[513px]' height='h-[36px]' holder={'ex. 100'} type={''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTotalEmp(e.target.value)} />
+                                                <Input className={'border-[#E6E6E6]'} fontSize='text-[14px]' fontWeight='font-[500]' width='w-[513px]' height='h-[36px]' holder={'ex. 100'} type="number" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTotalEmp(e.target.value)} />
                                             </div>
                                             <div className='flex flex-col h-auto mt-6'>
                                                 <Heading className='' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[78px]' height='h-[20px]'>Apply type</Heading>
@@ -150,7 +150,7 @@ export default function CreateJobModal({ show, setShow }: Props) {
                                         </div>
                                     }
                                     <div className='h-auto mt-24 float-right'>
-                                        <Button className={undefined} variant='primary' disabled={!title || !name || !industry} height='h-[72px]' width='w-[40px]' fontSize='text-[16px]' fontWeight='font-[500]' onClick={next ? handleSubmit : handleNext}>{next ? 'Save' : 'Next'}</Button>
+                                        <Button className={undefined} variant='primary' disabled={!title || !name || !industry || !location || !remoteType} height='h-[72px]' width='w-[40px]' fontSize='text-[16px]' fontWeight='font-[500]' onClick={next ? handleSubmit : handleNext}>{next ? 'Save' : 'Next'}</Button>
                                     </div>
                                 </div>
                             </Dialog.Panel>
