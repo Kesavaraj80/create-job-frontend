@@ -1,5 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
+import { createJobApi } from '../../api';
+import { job } from '../../types/types';
 import Button from '../Buttons/Button';
 import Heading from '../Heading/Heading';
 import Input from '../Input/Input';
@@ -14,6 +16,15 @@ export default function CreateJobModal({ show, setShow }: Props) {
     const [title, setTitle] = useState('')
     const [name, setName] = useState('')
     const [industry, setIndustry] = useState('')
+    const [location, setLocation] = useState('');
+    const [remoteType, setRemoteType] = useState('')
+    const [minExp, setMinExp] = useState('')
+    const [maxExp, setMaxExp] = useState('')
+    const [minSal, setMinSal] = useState('');
+    const [maxSal, setMaxSal] = useState('')
+    const [totalEmp, setTotalEmp] = useState('')
+    const [applyType, setApplyType] = useState('')
+
 
     const handleNext = () => {
         if (title && name && industry) {
@@ -22,7 +33,25 @@ export default function CreateJobModal({ show, setShow }: Props) {
     }
 
     const handleSubmit = () => {
+        const data: job = {
+            "job-title": title,
+            "company": name,
+            "industry": industry,
+            "location": location,
+            "remote-type": remoteType,
+            "total-employees": totalEmp,
+            "apply-type": applyType,
+            "min-exp": minExp,
+            "max-exp": maxExp,
+            "min-salary": minSal,
+            "max-salary": maxSal,
+        }
 
+        createJobApi(data).then((res) => {
+            if (res) {
+                setShow(!show)
+            }
+        }).catch((e) => console.error(e))
     }
 
     return (
@@ -63,8 +92,8 @@ export default function CreateJobModal({ show, setShow }: Props) {
                                                 <div className='flex flex-col'>
                                                     <Heading className='' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[60px]' height='h-[20px]'>Experience</Heading>
                                                     <div className='flex'>
-                                                        <Input className='border-[#E6E6E6]' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Minimum'} type='text' />
-                                                        <Input className='border-[#E6E6E6] ml-6' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Maximum'} type='text' />
+                                                        <Input className='border-[#E6E6E6]' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Minimum'} type='text' onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMinExp(e.target.value)} />
+                                                        <Input className='border-[#E6E6E6] ml-6' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Maximum'} type='text' onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMaxExp(e.target.value)} />
                                                     </div>
                                                 </div>
                                             </div>
@@ -72,24 +101,24 @@ export default function CreateJobModal({ show, setShow }: Props) {
                                                 <div className='flex flex-col'>
                                                     <Heading className='' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[45px]' height='h-[20px]'>Salary</Heading>
                                                     <div className='flex'>
-                                                        <Input className='border-[#E6E6E6]' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Minimum'} type='text' />
-                                                        <Input className='border-[#E6E6E6] ml-6' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Maximum'} type={''} />
+                                                        <Input className='border-[#E6E6E6]' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Minimum'} type='text' onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMinSal(e.target.value)} />
+                                                        <Input className='border-[#E6E6E6] ml-6' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'Maximum'} type={''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMaxSal(e.target.value)} />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className='flex flex-col h-auto mt-6'>
                                                 <Heading className='' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[110px]' height='h-[20px]'>Total employee</Heading>
-                                                <Input className={'border-[#E6E6E6]'} fontSize='text-[14px]' fontWeight='font-[500]' width='w-[513px]' height='h-[36px]' holder={'ex. 100'} type={''} />
+                                                <Input className={'border-[#E6E6E6]'} fontSize='text-[14px]' fontWeight='font-[500]' width='w-[513px]' height='h-[36px]' holder={'ex. 100'} type={''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTotalEmp(e.target.value)} />
                                             </div>
                                             <div className='flex flex-col h-auto mt-6'>
                                                 <Heading className='' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[78px]' height='h-[20px]'>Apply type</Heading>
                                                 <div className='flex mt-1'>
                                                     <div className='flex justify-center items-center'>
-                                                        <Input className={''} height='h-[20px]' type='radio' width='w-[20px]' fontSize={''} fontWeight={''} holder={''} name="apply-type" value='quick-apply' />
+                                                        <Input className={''} height='h-[20px]' type='radio' width='w-[20px]' fontSize={''} fontWeight={''} holder={''} name="apply-type" value='quick-apply' onChange={(e: React.ChangeEvent<HTMLInputElement>) => setApplyType(e.target.value)} />
                                                         <Heading className='text-holder ml-1' fontSize='text-[14px]' fontWeight='font-[400]' width='w-[83px]' height='h-[20px]'>Quick Apply</Heading>
                                                     </div>
                                                     <div className='flex justify-center items-center ml-6'>
-                                                        <Input className={''} height='h-[20px]' type='radio' width='w-[20px]' fontSize={''} fontWeight={''} holder={''} name="apply-type" value='external-apply' />
+                                                        <Input className={''} height='h-[20px]' type='radio' width='w-[20px]' fontSize={''} fontWeight={''} holder={''} name="apply-type" value='external-apply' onChange={(e: React.ChangeEvent<HTMLInputElement>) => setApplyType(e.target.value)} />
                                                         <Heading className='text-holder ml-1' fontSize='text-[14px]' fontWeight='font-[400]' width='w-[99px]' height='h-[20px]'>External apply</Heading>
                                                     </div>
                                                 </div>
@@ -111,11 +140,11 @@ export default function CreateJobModal({ show, setShow }: Props) {
                                             <div className='flex h-auto w-auto mt-6'>
                                                 <div className='flex flex-col'>
                                                     <Heading className='' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[60px]' height='h-[20px]'>Location</Heading>
-                                                    <Input className='border-[#E6E6E6]' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'ex. Chennai'} type={''} />
+                                                    <Input className='border-[#E6E6E6]' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'ex. Chennai'} type={''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLocation(e.target.value)} />
                                                 </div>
                                                 <div className='flex flex-col ml-6'>
                                                     <Heading className='' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[60px]' height='h-[20px]'>Remote type</Heading>
-                                                    <Input className='border-[#E6E6E6]' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'ex. In-office'} type={''} />
+                                                    <Input className='border-[#E6E6E6]' fontSize='text-[14px]' fontWeight='font-[500]' width='w-[244.5px]' height='h-[36px]' holder={'ex. In-office'} type={''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRemoteType(e.target.value)} />
                                                 </div>
                                             </div>
                                         </div>
