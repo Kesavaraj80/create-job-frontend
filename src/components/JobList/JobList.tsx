@@ -3,7 +3,7 @@ import JobCard from "../JobCard/JobCard"
 
 const JobList = ({jobData}:{jobData:job[]}) => {
   return (
-    <div className="w-full h-full flex flex-wrap justify-around bg-[#D8D8D8] pt-10">
+    <div className="w-full h-auto flex flex-wrap justify-around bg-[#D8D8D8] pt-10">
         {jobData.map((item:job)=>{
             return(
                 <JobCard data={item}/>

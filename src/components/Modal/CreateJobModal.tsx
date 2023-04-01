@@ -150,7 +150,12 @@ export default function CreateJobModal({ show, setShow }: Props) {
                                         </div>
                                     }
                                     <div className='h-auto mt-24 float-right'>
-                                        <Button className={undefined} variant='primary' disabled={!title || !name || !industry || !location || !remoteType} height='h-[72px]' width='w-[40px]' fontSize='text-[16px]' fontWeight='font-[500]' onClick={next ? handleSubmit : handleNext}>{next ? 'Save' : 'Next'}</Button>
+                                        {next ? (maxSal && minExp && minSal && maxSal && applyType) ? <>
+                                            <Button className={undefined} variant='primary' disabled={false} height='h-[72px]' width='w-[40px]' fontSize='text-[16px]' fontWeight='font-[500]' onClick={handleSubmit}>Save</Button>
+                                        </> : <></>
+                                            : <>
+                                                <Button className={undefined} variant='primary' disabled={!title || !name || !industry || !location || !remoteType} height='h-[72px]' width='w-[40px]' fontSize='text-[16px]' fontWeight='font-[500]' onClick={handleNext}>Next</Button>
+                                            </>}
                                     </div>
                                 </div>
                             </Dialog.Panel>

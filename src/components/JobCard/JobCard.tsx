@@ -5,7 +5,7 @@ import Heading from '../Heading/Heading'
 
 const JobCard = ({ data }: { data: job }) => {
     return (
-        <div className="w-[830px] h-[320px] rounded-2xl p-6 bg-secondary border border-[#E6E6E6]">
+        <div className="w-[830px] h-[320px] rounded-2xl p-6 bg-secondary border border-[#E6E6E6] mt-8 mb-8">
             <div className="h-full w-full flex">
                 <div className='h-full w-auto'>
                     <img src={Icon} alt="icon" />
